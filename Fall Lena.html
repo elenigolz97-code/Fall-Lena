@@ -1,0 +1,182 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fall Lena</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Inter:wght@400;600;700&display=swap">
+<style>
+/* Layout: Aktentisch. Oben die Fallbeschreibung, darunter drei Aktenmappen untereinander, jede mit Zahlenschloss. Bewusst ein einziges helles Papier-Design. */
+:root{
+  --desk:#2f3b3d; --paper:#f3e6c4; --paper-edge:#e2cf9f; --ink:#2b2520; --muted:#6b5e4a;
+  --stamp:#b3261e; --ok:#1f6b3a; --tab:#d9c08a;
+  --f-type:"Special Elite","Courier New",Courier,monospace;
+  --f-body:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+.brief{background:var(--paper);border-radius:4px;padding:22px 24px;box-shadow:0 8px 24px rgba(0,0,0,.35);position:relative}
+.brief .lbl{font-family:var(--f-type);color:var(--stamp);letter-spacing:.12em;text-transform:uppercase;font-size:14px}
+.brief h1{font-family:var(--f-type);font-weight:400;font-size:clamp(30px,6vw,44px);margin:4px 0 10px;text-wrap:balance}
+.brief p{margin:0 0 8px;max-width:62ch}
+.folder{position:relative;background:var(--paper);border-radius:0 6px 6px 6px;padding:22px 24px 24px;box-shadow:0 8px 24px rgba(0,0,0,.35);margin-top:18px}
+.folder::before{content:attr(data-tab);position:absolute;top:-30px;left:0;background:var(--tab);color:var(--ink);font-family:var(--f-type);padding:6px 16px 4px;border-radius:6px 6px 0 0;font-size:15px}
+.folder h2{font-family:var(--f-type);font-weight:400;font-size:26px;margin:0 0 4px}
+.folder .when{color:var(--muted);font-size:14px;margin:0 0 14px}
+.lock{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.digits{display:flex;gap:8px}
+.digits input{width:52px;height:62px;text-align:center;font-family:var(--f-type);font-size:32px;background:#fffaf0;border:2px solid var(--ink);border-radius:6px;color:var(--ink)}
+.digits input:focus{outline:3px solid var(--stamp);outline-offset:2px}
+.digits .sep{align-self:center;color:var(--muted);font-size:12px;max-width:52px;text-align:center}
+button{font-family:var(--f-body);font-weight:700;font-size:16px;background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:0 20px;height:62px;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.msg{margin-top:12px;min-height:1.5em;font-weight:600}
+.msg.bad{color:var(--stamp)}
+.msg.good{color:var(--ok)}
+.labels{display:flex;gap:8px;margin-top:6px}
+.labels span{width:52px;text-align:center;font-size:12px;color:var(--muted)}
+.stamp{position:absolute;right:18px;top:14px;font-family:var(--f-type);color:var(--stamp);border:3px solid var(--stamp);padding:4px 12px;transform:rotate(-8deg);font-size:22px;letter-spacing:.1em;opacity:.9}
+.solved .lock{opacity:.55}
+.board{background:#fffaf0;border:2px solid var(--paper-edge);border-radius:8px;margin-bottom:12px;touch-action:none}
+.board svg{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none}
+.pzab{cursor:grab}
+.pzab:active{cursor:grabbing}
+.st2h{font-family:var(--f-type);font-weight:400;font-size:22px;margin:18px 0 4px;border-top:2px dashed var(--paper-edge);padding-top:14px}
+.erz{cursor:pointer}
+.locked{border:2px dashed var(--paper-edge);border-radius:8px;padding:18px;color:var(--muted);font-weight:600;text-align:center;margin-top:8px}
+.folder.closed{opacity:.75}
+.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.foot{color:#c9d1cf;font-size:13px;text-align:center}
+.reset{background:none;color:#c9d1cf;height:auto;padding:4px 6px;font-weight:400;font-size:13px;text-decoration:underline;width:auto}
+@media (prefers-reduced-motion:no-preference){.stamp{animation:hit .35s ease-out}@keyframes hit{from{transform:rotate(-8deg) scale(1.8);opacity:0}to{transform:rotate(-8deg) scale(1);opacity:.9}}}
+@media (max-width:480px){.digits input{width:44px;height:54px;font-size:26px}.labels span{width:44px}button{height:54px;width:100%}}
+</style>
+
+<div class="wrap">
+  <section class="brief">
+    <div class="lbl">Fall Nr. 9c · Immunbiologie</div>
+    <h1>Fall Lena</h1>
+    <p>Lena hatte mit 5 Jahren Windpocken. Jetzt hat ihr kleiner Bruder Windpocken. Lena pflegt ihn, wird aber nicht krank.</p>
+    <p><b>Warum?</b> Löst die drei Akten. Am Ende jeder Akte bekommt ihr einen Code. Gebt ihn hier ein.</p>
+  </section>
+
+  <section class="folder" data-tab="Akte 1" id="a1">
+    <h2>Die Abwehrkette</h2>
+    <p class="when"><b>Spur 1:</b> Was passiert in Lenas Körper, wenn Windpockenviren eindringen?</p>
+    <p class="when">Code aus dem Verständnis-Check auf Fallakte 1 (nach der Besprechung)</p>
+    <div class="lock"><div><div class="digits"><input id="a1d0" inputmode="numeric" maxlength="1" aria-label="Frage 1"><input id="a1d1" inputmode="numeric" maxlength="1" aria-label="Frage 2"><input id="a1d2" inputmode="numeric" maxlength="1" aria-label="Frage 3"></div><div class="labels"><span>Frage 1</span><span>Frage 2</span><span>Frage 3</span></div></div><button data-akte="1">Prüfen</button></div>
+    <div class="msg" id="a1m" role="status"></div>
+  </section>
+
+  <section class="folder" data-tab="Akte 2" id="a2">
+    <h2>Der passende Schlüssel</h2>
+    <div class="locked" id="l2">Diese Akte ist noch verschlossen. Sie öffnet sich, sobald ihr Akte 1 gelöst habt.</div>
+    <div class="inner" id="i2" hidden>
+    <p class="when"><b>Spur 2:</b> Warum helfen Lenas Antikörper nur gegen Windpocken?</p>
+    <h3 class="st2h" style="border:0;padding-top:0;margin-top:4px">Puzzle</h3>
+    <p class="when">Zieht zu jedem Erreger den Antikörper, der genau passt. Ein Antikörper passt zu keinem Erreger.</p>
+    <div class="board"><svg id="pz" viewBox="0 0 800 620" role="img" aria-label="Puzzle: vier Erreger und fünf Antikörper"></svg></div>
+    <div class="lock"><button type="button" id="pzcheck">Puzzle prüfen</button><button type="button" id="pzback" class="ghost">Alle zurücklegen</button></div>
+    <div class="msg" id="pzm" role="status"></div>
+    <h3 class="st2h">Code</h3>
+    <p class="when">Code aus dem Verständnis-Check auf Fallakte 2 (nach der Besprechung)</p>
+    <div class="lock"><div><div class="digits"><input id="a2d0" inputmode="numeric" maxlength="1" aria-label="Frage 1"><input id="a2d1" inputmode="numeric" maxlength="1" aria-label="Frage 2"><input id="a2d2" inputmode="numeric" maxlength="1" aria-label="Frage 3"><input id="a2d3" inputmode="numeric" maxlength="1" aria-label="Frage 4"></div><div class="labels"><span>Frage 1</span><span>Frage 2</span><span>Frage 3</span><span>Frage 4</span></div></div><button data-akte="2">Prüfen</button></div>
+    <div class="msg" id="a2m" role="status"></div>
+      </div>
+  </section>
+
+  <section class="folder" data-tab="Akte 3" id="a3">
+    <h2>Erster und zweiter Kontakt</h2>
+    <div class="locked" id="l3">Diese Akte ist noch verschlossen. Sie öffnet sich, sobald ihr Akte 2 gelöst habt.</div>
+    <div class="inner" id="i3" hidden>
+    <p class="when"><b>Spur 3:</b> Warum wird Lena beim zweiten Kontakt nicht krank?</p>
+    <p class="when">Code aus dem Verständnis-Check auf Fallakte 3 (nach der Besprechung)</p>
+    <div class="lock"><div><div class="digits"><input id="a3d0" inputmode="numeric" maxlength="1" aria-label="Frage 1"><input id="a3d1" inputmode="numeric" maxlength="1" aria-label="Frage 2"><input id="a3d2" inputmode="numeric" maxlength="1" aria-label="Frage 3"></div><div class="labels"><span>Frage 1</span><span>Frage 2</span><span>Frage 3</span></div></div><button data-akte="3">Prüfen</button></div>
+    <div class="msg" id="a3m" role="status"></div>
+      </div>
+  </section>
+
+  <p class="foot">Bio 9c · Fallakten zur spezifischen Abwehr · <button type="button" id="reset" class="reset">Alle Akten auf diesem Gerät zurücksetzen</button></p>
+</div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg",svg=document.getElementById("pz");
+  var SH={tri:'<polygon points="-9,0 9,0 0,-13"/>',sq:'<rect x="-7" y="-12" width="14" height="12"/>',semi:'<path d="M -9 0 A 9 9 0 0 1 9 0 Z"/>',
+    zz:'<polygon points="-12,0 -12,-5 -6,-13 0,-5 6,-13 12,-5 12,0"/>',kreuz:'<polygon points="-4,0 -4,-6 -10,-6 -10,-11 -4,-11 -4,-15 4,-15 4,-11 10,-11 10,-6 4,-6 4,0"/>',
+    trap:'<polygon points="-6,0 6,0 10,-11 -10,-11"/>',T:'<polygon points="-3,0 3,0 3,-7 9,-7 9,-12 -9,-12 -9,-7 -3,-7"/>',
+    lolli:'<rect x="-2.5" y="-7" width="5" height="7"/><circle cx="0" cy="-10" r="5"/>',pfeil:'<polygon points="-3,0 3,0 3,-6 8,-6 0,-14 -8,-6 -3,-6"/>',
+    doppel:'<rect x="-11" y="-10" width="8" height="10"/><rect x="3" y="-10" width="8" height="10"/>',stufe:'<polygon points="-10,0 10,0 10,-6 2,-6 2,-12 -10,-12"/>',gabel:'<polygon points="-10,0 10,0 10,-13 5,-13 5,-5 -5,-5 -5,-13 -10,-13"/>'};
+  var ER=[["A","tri",100],["B","sq",300],["C","semi",500],["D","zz",700]],EY=300;
+  var AK=[[1,"sq"],[2,"zz"],[3,"tri"],[4,"semi"],[5,"kreuz"]];
+  var html='<text x="400" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-size="18" fill="#6b5e4a">Antikörper hier über den Erreger ziehen</text>';
+  ER.forEach(function(e){var ag="";for(var a=0;a<360;a+=45)ag+='<g transform="translate('+e[2]+','+EY+') rotate('+a+') translate(0,-52)" fill="#e07b2a" stroke="#8a4512" stroke-width="1">'+SH[e[1]]+'</g>';
+    html+='<circle cx="'+e[2]+'" cy="'+EY+'" r="52" fill="#dfe8a8" stroke="#6b7a2a" stroke-width="2"/>'+ag+'<circle cx="'+e[2]+'" cy="'+EY+'" r="15" fill="#b8c46a"/><text x="'+e[2]+'" y="'+(EY+7)+'" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="22" fill="#2b2520">'+e[0]+'</text>';});
+  html+='<line x1="20" y1="405" x2="780" y2="405" stroke="#d8c79a" stroke-dasharray="6 6"/>';
+  svg.innerHTML=html;
+  var col="#3b6fb6",items=[],slot={};
+  function sock(cx,sh){return '<rect x="'+(cx-15)+'" y="-52" width="30" height="22" rx="2" fill="'+col+'"/><g transform="translate('+cx+',-52) scale(1,-1)" fill="#fffaf0">'+SH[sh]+'</g>'}
+  AK.forEach(function(a,i){var g=document.createElementNS(NS,"g");g.setAttribute("class","pzab");g.dataset.n=a[0];
+    g.innerHTML='<rect x="-58" y="-60" width="116" height="165" fill="transparent"/><path d="M 0 90 L 0 25 M 0 25 L -30 0 L -30 -30 M 0 25 L 30 0 L 30 -30" stroke="'+col+'" stroke-width="11" fill="none" stroke-linejoin="round"/>'+sock(-30,a[1])+sock(30,a[1])+'<circle cx="0" cy="68" r="13" fill="#fffaf0"/><text class="num" x="0" y="74" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="17" fill="'+col+'">'+a[0]+'</text>';
+    svg.appendChild(g);var it={g:g,n:a[0],home:[80+i*160,470],at:null};items.push(it);place(it);});
+  function place(it){var t=it.g.querySelector(".num");
+    if(it.at===null){it.g.setAttribute("transform","translate("+it.home[0]+","+it.home[1]+") scale(.8)");t.setAttribute("transform","");}
+    else{var ex=ER[it.at][2];it.g.setAttribute("transform","translate("+(ex+30)+","+(EY-104)+") rotate(180)");t.setAttribute("transform","rotate(180 0 68)");}}
+  function pt(ev){var p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+  var drag=null;
+  function drop(ev){var it=drag;if(!it)return;drag=null;var p=pt(ev),best=null,bd=1e9;
+      ER.forEach(function(e,k){var d=Math.abs(p.x-e[2]);if(d<bd){bd=d;best=k}});
+      if(p.y<400&&bd<100){if(slot[best]&&slot[best]!==it){slot[best].at=null;place(slot[best])}if(it.at!==null)delete slot[it.at];it.at=best;slot[best]=it}
+      else{if(it.at!==null)delete slot[it.at];it.at=null}
+      place(it)}
+  items.forEach(function(it){it.g.addEventListener("pointerdown",function(ev){ev.preventDefault();svg.appendChild(it.g);drag=it;move(ev)})});
+  window.addEventListener("pointermove",function(ev){if(drag){ev.preventDefault();move(ev)}},{passive:false});
+  window.addEventListener("pointerup",drop);
+  window.addEventListener("pointercancel",drop);
+  function move(ev){var p=pt(ev);drag.g.setAttribute("transform","translate("+p.x+","+(p.y-20)+") scale(.8)");drag.g.querySelector(".num").setAttribute("transform","")}
+  window.puzzle={get:function(){return ER.map(function(e,k){return slot[k]?String(slot[k].n):""})},
+    reset:function(){items.forEach(function(it){it.at=null;place(it)});slot={}},
+    solve:function(){var sol=[3,1,4,2];slot={};items.forEach(function(it){it.at=null});sol.forEach(function(n,k){var it=items[n-1];it.at=k;slot[k]=it});items.forEach(place)}};
+  document.getElementById("pzback").addEventListener("click",function(){window.puzzle.reset();document.getElementById("pzm").textContent=""});
+  document.getElementById("pzcheck").addEventListener("click",function(){var m=document.getElementById("pzm"),g=window.puzzle.get(),sol=["3","1","4","2"];
+    if(g.indexOf("")>=0){m.className="msg bad";m.textContent="Zieht zu jedem Erreger einen Antikörper.";return}
+    var ok=g.filter(function(v,i){return v===sol[i]}).length;
+    if(ok===4){m.className="msg good";m.textContent="Puzzle gelöst! Jeder Antikörper passt nur zu einem Erreger. Weiter mit Aufgabe 2 auf der Fallakte."}
+    else{m.className="msg bad";m.textContent="Noch nicht. Bei "+ok+" von 4 Erregern passt der Antikörper. Schaut euch die Formen genau an."}});
+})();
+</script>
+<script>
+(function(){
+  var K={1:[55,51,49],2:[54,52,50,51],3:[56,52,51]};
+  var LBL={1:["Frage 1","Frage 2","Frage 3"],2:["Frage 1","Frage 2","Frage 3","Frage 4"],3:["Frage 1","Frage 2","Frage 3"]};
+  var OK={1:"Akte 1 gelöst! Ihr kennt die Abwehrkette. Aber was heißt eigentlich „passend“? Das klärt Akte 2.",
+          2:"Akte 2 gelöst! Jeder Antikörper passt nur zu seinem Antigen. Aber warum wird Lena beim zweiten Mal nicht krank? Weiter mit Akte 3.",
+          3:"Akte 3 gelöst! Damit habt ihr alle drei Spuren. Der Fall Lena ist abgeschlossen."};
+  var tries={};
+  function lockout(n,m){var b=document.querySelector('button[data-akte="'+n+'"]');b.disabled=true;var t=45;tries[n]=0;(function tick(){m.textContent="Drei Fehlversuche. Schloss gesperrt für "+t+" Sekunden. Nutzt die Zeit und prüft eure Antworten mit dem Material.";if(t--<=0){b.disabled=false;m.textContent="Das Schloss ist wieder offen.";return}setTimeout(tick,1000)})()}
+  function save(n){try{localStorage.setItem("fallLena"+n,"1")}catch(e){}}
+  function was(n){try{return localStorage.getItem("fallLena"+n)==="1"}catch(e){return false}}
+  function unlock(n,scroll){var i=document.getElementById("i"+n),l=document.getElementById("l"+n);if(!i)return;i.hidden=false;l.hidden=true;document.getElementById("a"+n).classList.remove("closed");if(scroll)document.getElementById("a"+n).scrollIntoView({behavior:"smooth",block:"start"})}
+  function lockA(n){var i=document.getElementById("i"+n),l=document.getElementById("l"+n);if(!i)return;i.hidden=true;l.hidden=false;document.getElementById("a"+n).classList.add("closed")}
+  [2,3].forEach(lockA);
+  function stamp(n){var f=document.getElementById("a"+n);if(f.querySelector(".stamp"))return;f.classList.add("solved");var s=document.createElement("div");s.className="stamp";s.textContent="GELÖST";f.appendChild(s)}
+  function check(n){
+    var code=K[n],wrong=[],empty=false;
+    for(var i=0;i<code.length;i++){var v=document.getElementById("a"+n+"d"+i).value.trim();if(!v){empty=true}else if(v.charCodeAt(0)!==code[i]){wrong.push(LBL[n][i])}}
+    var m=document.getElementById("a"+n+"m");
+    if(empty){m.className="msg bad";m.textContent="Tragt in jedes Feld eine Ziffer ein.";return}
+    if(wrong.length){tries[n]=(tries[n]||0)+1;var ok=code.length-wrong.length;var unit="Fragen";m.className="msg bad";if(tries[n]>=3){lockout(n,m);return}m.textContent="Noch nicht. "+ok+" von "+code.length+" "+unit+(ok===1?" ist":" sind")+" richtig. Besprecht die Fragen noch einmal mit eurem Material.";return}
+    tries[n]=0;
+    m.className="msg good";m.textContent=OK[n];stamp(n);save(n);
+    if(n<3)setTimeout(function(){unlock(+n+1,true)},900);
+  }
+  document.querySelectorAll("button[data-akte]").forEach(function(b){b.addEventListener("click",function(){check(b.getAttribute("data-akte"))})});
+  document.querySelectorAll(".digits input").forEach(function(inp){
+    inp.addEventListener("input",function(){inp.value=inp.value.replace(/\D/g,"").slice(0,1);if(inp.value&&inp.nextElementSibling&&inp.nextElementSibling.tagName==="INPUT")inp.nextElementSibling.focus()});
+    inp.addEventListener("keydown",function(e){if(e.key==="Backspace"&&!inp.value&&inp.previousElementSibling&&inp.previousElementSibling.tagName==="INPUT")inp.previousElementSibling.focus();if(e.key==="Enter"){var b=inp.closest(".lock").querySelector("button");b.click()}});
+  });
+  document.getElementById("reset").addEventListener("click",function(){[2,3].forEach(lockA);if(window.puzzle)window.puzzle.reset();document.getElementById("pzm").textContent="";[1,2,3].forEach(function(n){try{localStorage.removeItem("fallLena"+n)}catch(e){}var f=document.getElementById("a"+n);f.classList.remove("solved");var st=f.querySelector(".stamp");if(st)st.remove();var m=document.getElementById("a"+n+"m");m.className="msg";m.textContent="";f.querySelectorAll(".digits input").forEach(function(i){i.value=""})})});
+  [1,2,3].forEach(function(n){if(was(n)){if(n<3)unlock(n+1,false);document.getElementById("a"+n+"m").className="msg good";document.getElementById("a"+n+"m").textContent=OK[n];stamp(n)}});
+})();
+</script>
+
+</body></html>
